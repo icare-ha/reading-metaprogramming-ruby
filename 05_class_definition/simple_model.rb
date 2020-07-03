@@ -12,3 +12,18 @@
 # 2. initializeメソッドはハッシュを受け取り、attr_accessorで作成したアトリビュートと同名のキーがあれば、自動でインスタンス変数に記録する
 #   1. ただし、この動作をwriterメソッドの履歴に残してはいけない
 # 3. 履歴がある場合、すべての操作履歴を放棄し、値も初期状態に戻す `restore!` メソッドを作成する
+
+module SimpleModel
+  def initialize(**arguments)
+    arguments.each do |key, val|
+      instance_variable_set("@#{key}", val)
+
+      define_singleton_method :"#{key}_changed?" do
+        
+      end
+    end
+  end
+
+  def changed?
+  end
+end
